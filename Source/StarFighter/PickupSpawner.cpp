@@ -33,7 +33,7 @@ void APickupSpawner::Tick(float DeltaTime)
 }
 void APickupSpawner::PickupCollected()
 {
-	GetWorld()->GetTimerManager().SetTimer(MyTimer, this, &APickupSpawner::SpawnPickup, 10, false);
+	GetWorld()->GetTimerManager().SetTimer(MyTimer, this, &APickupSpawner::SpawnPickup, 3, false);
 
 	CurrentPickup->OnPickedUp.Unbind();
 	CurrentPickup->Destroy();

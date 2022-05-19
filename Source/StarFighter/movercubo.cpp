@@ -33,24 +33,21 @@ void Umovercubo::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompo
 
 	
 		Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-		if (velocidad < 4) {
-			velocidad += velocidad * DeltaTime;
-		}
-		else {
-			velocidad = velocidad;
-		}
-
+		
+		
 
 		posiciones.X = velocidad + cubo->GetActorLocation().X;
-		posiciones.Y = velocidad + cubo->GetActorLocation().Y;
+		posiciones.Y =  cubo->GetActorLocation().Y;
 		posiciones.Z = cubo->GetActorLocation().Z;
 		cubo->SetActorLocation(posiciones);
 
 
 
-		if (cubo->GetActorLocation().X > 300 || cubo->GetActorLocation().Y > 300)
+		if (cubo->GetActorLocation().X > Limitex1 || cubo->GetActorLocation().Y > 500|| cubo->GetActorLocation().X < Limitex2)
 		{
-			cubo->SetActorLocation(FVector(-440, -20, 70));
+
+			velocidad *= -1;
+			//cubo->SetActorLocation(FVector(-440, -20, 70));
 		}
 	
 
@@ -58,7 +55,7 @@ void Umovercubo::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompo
 
 void Umovercubo::SetVelocidad(float _velocidad)
 {
-	velocidad = _velocidad;
+	velocidad += _velocidad;
 }
 
 float Umovercubo::GetVelocidad()

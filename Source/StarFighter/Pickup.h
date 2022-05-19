@@ -41,5 +41,11 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	
+
+	UPROPERTY(VisibleAnywhere)
+		class Umovercubo* movercuboComponent;
+
+	FTimerHandle TimerHandle;
+
+	void UpgradePlayerLevel();
 };
