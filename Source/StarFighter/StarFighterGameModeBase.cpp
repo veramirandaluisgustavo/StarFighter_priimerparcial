@@ -11,6 +11,8 @@ void AStarFighterGameModeBase::BeginPlay()
 	//auto ne = SpawnNave<ANaveTerrestreEnemiga01>();
 	UE_LOG(LogTemp, Warning, TEXT("Dentro de BeginPlay en GameModeBase"));
 	GetWorld()->SpawnActor<ANaveTerrestreEnemiga01>(FVector::ZeroVector, FRotator::ZeroRotator);
+
+
 	
 }
 

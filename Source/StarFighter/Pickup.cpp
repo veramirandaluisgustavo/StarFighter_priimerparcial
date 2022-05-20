@@ -15,8 +15,7 @@ APickup::APickup()
 	PrimaryActorTick.bCanEverTick = true;
 
 
-	movercuboComponent = CreateDefaultSubobject<Umovercubo>(
-		TEXT("HealthManaComponent"));
+	movercuboComponent = CreateDefaultSubobject<Umovercubo>(TEXT("HealthManaComponent"));
 
 
 
@@ -67,8 +66,7 @@ void APickup::BeginPlay()
 {
 	Super::BeginPlay();
 
-	GetWorldTimerManager().SetTimer(TimerHandle, this,
-		&APickup::UpgradePlayerLevel, 5.f, true);
+	GetWorldTimerManager().SetTimer(TimerHandle, this,&APickup::UpgradePlayerLevel, 5.f, true);
 
 	
 }
