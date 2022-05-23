@@ -20,20 +20,21 @@ public:
 		USceneComponent* SpawnLocation;
 
 	UFUNCTION()
-		void PickupCollected();
+		virtual void PickupCollected();
 
 	UFUNCTION()
-		void SpawnPickup();
+		virtual void SpawnPickup() ;
 	UPROPERTY()
-		APickup* CurrentPickup;
+	 APickup* CurrentPickup;
 	//timer 
 	FTimerHandle MyTimer;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
+	
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	int hora = 0;
 
 };

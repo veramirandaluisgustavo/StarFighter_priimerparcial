@@ -2,6 +2,8 @@
 
 
 #include "movercubo.h"
+#include "StarFighterGameModeBase.h"
+#include "Kismet/GameplayStatics.h"
 #include "Engine/World.h"
 
 // Sets default values for this component's properties
@@ -40,24 +42,43 @@ void Umovercubo::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompo
 		
 
 		posiciones.X = velocidad + cubo->GetActorLocation().X;
-		posiciones.Y = direccion + cubo->GetActorLocation().Y;
+		posiciones.Y =  5+cubo->GetActorLocation().Y;
 		posiciones.Z = cubo->GetActorLocation().Z;
 		cubo->SetActorLocation(posiciones);
 
 
-		if (GetWorld()->GetRealTimeSeconds() - TiempoE > 3.0f) {
+		if (GetWorld()->GetRealTimeSeconds() - TiempoE > 1.0f) {
 
 			TiempoE = GetWorld()->GetRealTimeSeconds();
 			int numerop = Numrand(1,10);
 			if (numerop > 5) {
 
-				direccion *=-1;
+				velocidad *=-1;
 			}
 			
 		}
+		if(cubo->GetActorLocation().Y > 1500  )
+		{
+		
+			UWorld* TheWorld = GetWorld();
+			if (TheWorld != nullptr)
+			{
+
+				AGameModeBase* GameMode = UGameplayStatics::GetGameMode(TheWorld);
+				AStarFighterGameModeBase* MyGameMode = Cast<AStarFighterGameModeBase>(GameMode);
+				if (MyGameMode != nullptr) {
+
+					MyGameMode->MyDestructorDelegate.ExecuteIfBound();
+
+				}
+
+			}
 
 
-		if (cubo->GetActorLocation().X > Limitex1 || cubo->GetActorLocation().Y > 500|| cubo->GetActorLocation().X < Limitex2)
+
+		}
+
+		if (cubo->GetActorLocation().X > 900 || cubo->GetActorLocation().X < -900)
 		{
 			
 			velocidad *= -1;

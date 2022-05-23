@@ -38,7 +38,17 @@ APickup::APickup()
 	MyMesh->SetCollisionProfileName(TEXT("OverlapAllDynamic"));
 	RotatingComponent->RotationRate = FRotator(0, 0, 0);
 
-	
+	NumR= FMath::RandRange(1, 4);
+	switch (NumR)
+	{
+
+	case 1:llave = "salud"; break;
+	case 2:llave= "vida"; break;
+	case 3:llave = "velocidad"; break;
+	case 4:llave = "mina"; break;
+	default:llave = "salud";
+		break;
+	}
 
 
 }
@@ -52,9 +62,15 @@ void APickup::NotifyActorBeginOverlap(AActor* OtherActor)
 	float vel = movercuboComponent->GetVelocidad();
 	movercuboComponent->SetVelocidad(1);
 	//string String = static_cast<ostringstream*>(&(ostringstream() << vel))->str();
+
+
+
 	auto Message = FString::Printf(TEXT("%s me disparo  "), *(OtherActor->GetName()));
+
+
+
 	//auto Message2 = FString::Printf(TEXT("%s la velocidad es "),*());
-	GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, Message);
+	//GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, Message);
 	//GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, Message2);
 
 

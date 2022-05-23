@@ -23,9 +23,11 @@ protected:
 	UPROPERTY(EditAnywhere)
 		float velocidad=5.0 ;
 	UPROPERTY(EditAnywhere)
-		float Limitex1=500.0 ;
+		double Limitex1=900 ;
 	UPROPERTY(EditAnywhere)
-		float Limitex2 =-500.0;
+		double Limitex2 =-900;
+	UPROPERTY(EditAnywhere)
+	float direccion = 2.0f;
 
 public:	
 	// Called every frame
@@ -43,5 +45,6 @@ public:
 	int RandMin=1;
 	int Numrand(int, int);
 	float TiempoE;
-	float direccion = 5.0;
+	
+	
 };

@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Components/BoxComponent.h"
 #include "movercubo.h"
+#include "Math/Vector.h"
 #include "GameFramework/RotatingMovementComponent.h"
 #include "Pickup.generated.h"
 
@@ -57,6 +58,6 @@ public:
 
 	void UpgradePlayerLevel();
 
-
+	int NumR;
 
 };

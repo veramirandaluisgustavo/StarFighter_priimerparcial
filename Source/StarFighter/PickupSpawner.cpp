@@ -2,6 +2,8 @@
 
 
 #include "PickupSpawner.h"
+#include "StarFighterGameModeBase.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 APickupSpawner::APickupSpawner()
@@ -22,6 +24,19 @@ void APickupSpawner::BeginPlay()
 	
       SpawnPickup();
 
+	  UWorld* TheWorld = GetWorld();
+	  if (TheWorld != nullptr)
+	  {
+
+		  AGameModeBase* GameMode = UGameplayStatics::GetGameMode(TheWorld);
+		  AStarFighterGameModeBase* MyGameMode = Cast<AStarFighterGameModeBase>(GameMode);
+		  if (MyGameMode != nullptr) {
+
+			  MyGameMode->MyDestructorDelegate.BindUObject(this, &APickupSpawner::PickupCollected);
+
+		  }
+
+	  }
 
 }
 
@@ -40,7 +55,11 @@ void APickupSpawner::PickupCollected()
 	CurrentPickup->OnPickedUp.Unbind();
 	CurrentPickup->Destroy();
 
+
+
+
 }
+
 
 void APickupSpawner::SpawnPickup()
 {

@@ -4,7 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+
+
+#include "GameFramework/RotatingMovementComponent.h"
 #include "Nave.generated.h"
+
+
+
+
+DECLARE_DELEGATE(FPickedupEventSignature)
+
 
 UCLASS()
 class STARFIGHTER_API ANave : public APawn
@@ -31,6 +40,10 @@ public:
 	static const FName MoveForwardBinding;
 	static const FName MoveRightBinding;
 	static const FName FireBinding;
+
+
+	FPickedupEventSignature OnPickedUp;
+
 
 protected:
 	// Called when the game starts or when spawned

@@ -8,6 +8,10 @@
 #include "Components/InputComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Kismet/GameplayStatics.h"
+
+#include <string>
+#include <iterator>
+
 #include "Engine/World.h"
 
 
@@ -272,6 +276,6 @@ void ANaveAereaJugador::CapsuleNave(FString llave, int valor)
 
 
 	//GEngine->AddOnScreenDebugMessage(-1, 4, FColor::Red, TEXT("vida="));
-	GEngine->AddOnScreenDebugMessage(-1, 4, FColor::Red, FString::Printf(TEXT("%i"),temp));
+	GEngine->AddOnScreenDebugMessage(-1, 4, FColor::Red, FString::Printf(TEXT("%s = %i"),*llave,temp));
 
 }

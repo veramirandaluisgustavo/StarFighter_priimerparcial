@@ -10,7 +10,7 @@
  * 
  */
 
-
+DECLARE_DELEGATE(FDelegateDestructor)
 DECLARE_DELEGATE_TwoParams(FDelegateInventory, FString, int)
 
 UCLASS()
@@ -29,6 +29,8 @@ public:
 	T SpawnNave();
 
 	FDelegateInventory MyInventoryDelegate;
+
+	FDelegateDestructor MyDestructorDelegate;
 };
 
 template<typename T>
