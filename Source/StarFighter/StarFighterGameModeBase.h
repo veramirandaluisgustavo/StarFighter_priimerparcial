@@ -9,6 +9,10 @@
 /**
  * 
  */
+
+
+DECLARE_DELEGATE_TwoParams(FDelegateInventory, FString, int)
+
 UCLASS()
 class STARFIGHTER_API AStarFighterGameModeBase : public AGameModeBase
 {
@@ -24,7 +28,7 @@ public:
 	template<typename T>
 	T SpawnNave();
 
-
+	FDelegateInventory MyInventoryDelegate;
 };
 
 template<typename T>

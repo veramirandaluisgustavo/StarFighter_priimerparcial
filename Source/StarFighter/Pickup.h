@@ -34,6 +34,14 @@ public:
 		URotatingMovementComponent* RotatingComponent;
 
 	FPickedupEventSignature OnPickedUp;
+
+
+
+	UPROPERTY(EditAnywhere)
+		FString llave= "salud";
+	UPROPERTY(EditAnywhere)
+		int valor = 1;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -48,4 +56,7 @@ public:
 	FTimerHandle TimerHandle;
 
 	void UpgradePlayerLevel();
+
+
+
 };

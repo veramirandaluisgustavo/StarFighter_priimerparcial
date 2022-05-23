@@ -6,6 +6,8 @@
 #include<string>
 #include <iostream>
 #include "movercubo.h"
+#include "StarFighterGameModeBase.h"
+#include "Kismet/GameplayStatics.h"
 #include "UObject/ConstructorHelpers.h"
 
 // Sets default values
@@ -17,10 +19,8 @@ APickup::APickup()
 
 	movercuboComponent = CreateDefaultSubobject<Umovercubo>(TEXT("HealthManaComponent"));
 
-
-
-
 	TriggerZone = CreateDefaultSubobject<UBoxComponent>("TriggerZone");
+
 	TriggerZone->SetBoxExtent(FVector(50, 50, 50));
 
 	MyMesh = CreateDefaultSubobject<UStaticMeshComponent>("MyMesh");
@@ -28,7 +28,7 @@ APickup::APickup()
 	RotatingComponent = CreateDefaultSubobject<URotatingMovementComponent>("RotatingComponent");
 	RootComponent = MyMesh;
 
-	auto MeshAsset = ConstructorHelpers::FObjectFinder<UStaticMesh>(TEXT("StaticMesh'/Engine/BasicShapes/Cube.Cube'"));
+	auto MeshAsset = ConstructorHelpers::FObjectFinder<UStaticMesh>(TEXT("StaticMesh'/Engine/BasicShapes/Cylinder.Cylinder'"));
 
 	if (MeshAsset.Object != nullptr)
 	{
@@ -56,6 +56,22 @@ void APickup::NotifyActorBeginOverlap(AActor* OtherActor)
 	//auto Message2 = FString::Printf(TEXT("%s la velocidad es "),*());
 	GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, Message);
 	//GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, Message2);
+
+
+	UWorld* TheWorld = GetWorld();
+
+	if (TheWorld != nullptr)
+	{
+
+		AGameModeBase* GameMode = UGameplayStatics::GetGameMode(TheWorld);
+		AStarFighterGameModeBase* MyGameMode = Cast<AStarFighterGameModeBase>(GameMode);
+		if (MyGameMode != nullptr) {
+
+			MyGameMode->MyInventoryDelegate.ExecuteIfBound(llave,valor);
+
+		}
+
+	}
 	
 
 

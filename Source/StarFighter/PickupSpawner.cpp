@@ -20,9 +20,9 @@ void APickupSpawner::BeginPlay()
 {
 	Super::BeginPlay();
 	
+      SpawnPickup();
 
 
-	SpawnPickup();
 }
 
 // Called every frame
@@ -31,6 +31,8 @@ void APickupSpawner::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 }
+
+
 void APickupSpawner::PickupCollected()
 {
 	GetWorld()->GetTimerManager().SetTimer(MyTimer, this, &APickupSpawner::SpawnPickup, 3, false);

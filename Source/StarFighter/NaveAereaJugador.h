@@ -18,6 +18,13 @@ UCLASS()
 class STARFIGHTER_API ANaveAereaJugador : public ANaveAerea
 {
 	GENERATED_BODY()
+
+
+		UPROPERTY()
+		TMap <FString, int>InfoNave;
+
+	UFUNCTION()
+		void CapsuleNave(FString llave,int valor);
 	
 	/** The camera */
 	UPROPERTY(Category = Camera, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
@@ -45,6 +52,9 @@ public:
 	/* Handler for the fire timer expiry */
 	void ShotTimerExpired();
 
+
+	virtual void BeginPlay() override;
+
 	/** Offset from the ships location to spawn projectiles */
 	UPROPERTY(Category = Gameplay, EditAnywhere, BlueprintReadWrite)
 		FVector GunOffset;
@@ -62,6 +72,10 @@ public:
 
 	UFUNCTION()
 		void DropItem();
+
+
+	UFUNCTION()
+		void ShowInventory();
 
 	UFUNCTION()
 		virtual void NotifyHit(class UPrimitiveComponent* MyComp, AActor* Other, class UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit) override;
@@ -83,5 +97,6 @@ private:
 
 	float FireForwardValue;
 	float FireRightValue;
+	int salud;
 
 };

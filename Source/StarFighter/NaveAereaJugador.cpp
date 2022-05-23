@@ -3,12 +3,13 @@
 
 #include "NaveAereaJugador.h"
 #include "Proyectil.h"
-
+#include "StarFighterGameModeBase.h"
 #include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Engine/World.h"
+
 
 ANaveAereaJugador::ANaveAereaJugador()
 {
@@ -61,7 +62,39 @@ ANaveAereaJugador::ANaveAereaJugador()
 	//	//UE_LOG(LogTemp, Warning, TEXT("SpawnLocation(X, Y) = %s, %s FireRotation(X, Y) =  s, s"), SpawnLocation.X, SpawnLocation.Y);
 	//	//UE_LOG(LogTemp, Warning, TEXT("World not nullptr"));
 	//}
+
+
+
+
+
+	InfoNave.Add("vida",0);
+	InfoNave.Add("salud", 0);
+	InfoNave.Add("velocidad", 0);
+	InfoNave.Add("mina",0);
+
+
 }
+
+void ANaveAereaJugador::BeginPlay()
+{
+	Super::BeginPlay();
+	UWorld* TheWorld = GetWorld();
+
+	if (TheWorld != nullptr)
+	{
+
+		AGameModeBase* GameMode = UGameplayStatics::GetGameMode(TheWorld);
+		AStarFighterGameModeBase* MyGameMode = Cast<AStarFighterGameModeBase>(GameMode);
+		if(MyGameMode!=nullptr){
+		
+			MyGameMode->MyInventoryDelegate.BindUObject(this, &ANaveAereaJugador::CapsuleNave);
+
+		}
+
+	}
+}
+
+
 
 void ANaveAereaJugador::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
@@ -177,6 +210,8 @@ void ANaveAereaJugador::ShotTimerExpired()
 	bCanFire = true;
 }
 
+
+
 void ANaveAereaJugador::DropItem()
 {
 	if (ShipInventory->CurrentInventory.Num() == 0)
@@ -199,6 +234,20 @@ void ANaveAereaJugador::TakeItem(AInventoryActor* InventoryItem)
 	ShipInventory->AddToInventory(InventoryItem);
 }
 
+void ANaveAereaJugador::ShowInventory()
+{
+
+
+	for (auto& Elem : InfoNave)
+	{
+		//FPlatformMisc::LocalPrint(*FString::Printf(TEXT("(%d, \"%s\")\n"),Elem.Key,*Elem.Value));
+
+
+		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, FString::Printf(TEXT("%s=%d"), *Elem.Key, Elem.Value));
+	}
+
+}
+
 void ANaveAereaJugador::NotifyHit(class UPrimitiveComponent* MyComp, AActor* Other, class UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit)
 {
 	AInventoryActor* InventoryItem = Cast<AInventoryActor>(Other);
@@ -206,6 +255,23 @@ void ANaveAereaJugador::NotifyHit(class UPrimitiveComponent* MyComp, AActor* Oth
 	{
 		TakeItem(InventoryItem);
 
+		
+
+
+		
 	}
 }
 
+void ANaveAereaJugador::CapsuleNave(FString llave, int valor)
+{
+
+	int temp = InfoNave[llave]+valor;
+
+	InfoNave.Add(llave,temp);
+
+
+
+	//GEngine->AddOnScreenDebugMessage(-1, 4, FColor::Red, TEXT("vida="));
+	GEngine->AddOnScreenDebugMessage(-1, 4, FColor::Red, FString::Printf(TEXT("%i"),temp));
+
+}

@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "MuroMove.generated.h"
 
+DECLARE_DELEGATE(FPickedupEventSignature)
 UCLASS()
 class STARFIGHTER_API AMuroMove : public AActor
 {
@@ -14,6 +15,10 @@ class STARFIGHTER_API AMuroMove : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AMuroMove();
+
+
+	
+    FPickedupEventSignature OnPickedUp;
 
 protected:
 	// Called when the game starts or when spawned

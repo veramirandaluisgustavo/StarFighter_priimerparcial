@@ -39,4 +39,9 @@ public:
 	float* p_velocidad = & velocidad;
 	void SetVelocidad(float _velocidad);
 	float GetVelocidad();
+	int RandMax=10;
+	int RandMin=1;
+	int Numrand(int, int);
+	float TiempoE;
+	float direccion = 5.0;
 };
